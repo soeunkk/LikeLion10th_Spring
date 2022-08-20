@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Entity
-public class Course {
+public class Course extends Timestamped {
 	@Id	// PK로 사용하겠다는 의미
 	@GeneratedValue(strategy = GenerationType.AUTO)	// id 값 자동으로 증가
 	private Long id;
