@@ -27,11 +27,20 @@ public class Course extends Timestamped {
 		this.tutor = tutor;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public String getTutor() {
 		return tutor;
+	}
+
+	public void update(Course course) {
+		this.title = course.title;
+		this.tutor = course.tutor;
 	}
 }
