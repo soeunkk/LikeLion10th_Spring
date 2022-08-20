@@ -31,6 +31,12 @@ public class Course extends Timestamped {
 		this.tutor = tutor;
 	}
 
+	// Dto를 통한 Course 생성자
+	public Course(CourseRequestDto requestDto) {
+		this.title = requestDto.getTitle();
+		this.tutor = requestDto.getTutor();
+	}
+
 	public void update(CourseRequestDto requestDto) {
 		this.title = requestDto.getTitle();
 		this.tutor = requestDto.getTutor();

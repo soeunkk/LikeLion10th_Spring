@@ -22,39 +22,28 @@ public class Week02Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(CourseRepository repository, CourseService service) {
+	public CommandLineRunner demo(CourseRepository courseRepository, CourseService courseService) {
 		return (args) -> {
-			// 데이터 저장하기
-			repository.save(new Course("프론트엔드의 꽃, 리액트", "임민영"));
+			courseRepository.save(new Course("프론트엔드의 꽃, 리액트", "임민영"));
 
-			// 데이터 전부 조회하기
-			List<Course> courseList = repository.findAll();
+			System.out.println("데이터 인쇄");
+			List<Course> courseList = courseRepository.findAll();
 			for (int i=0; i<courseList.size(); i++) {
-				Course courseItem = courseList.get(i);
-				System.out.println(courseItem.getId());
-				System.out.println(courseItem.getTitle());
-				System.out.println(courseItem.getTutor());
+				Course course = courseList.get(i);
+				System.out.println(course.getId());
+				System.out.println(course.getTitle());
+				System.out.println(course.getTutor());
 			}
 
-			// 데이터 하나 조회하기
-			Course course = repository.findById(1L).orElseThrow(
-					() -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다.")
-			);
-
-			// 데이터 갱신하기
-			CourseRequestDto requestDto = new CourseRequestDto("프론트엔드의 꽃, 리액트", "임민영");
-			service.update(1L, requestDto);
-			courseList = repository.findAll();
+			CourseRequestDto requestDto = new CourseRequestDto("웹개발의 봄, Spring", "임민영");
+			courseService.update(1L, requestDto);
+			courseList = courseRepository.findAll();
 			for (int i=0; i<courseList.size(); i++) {
-				Course courseItem = courseList.get(i);
-				System.out.println(courseItem.getId());
-				System.out.println(courseItem.getTitle());
-				System.out.println(courseItem.getTutor());
+				Course course = courseList.get(i);
+				System.out.println(course.getId());
+				System.out.println(course.getTitle());
+				System.out.println(course.getTutor());
 			}
-
-			// 데이터 삭제하기
-			repository.deleteAll();
-			System.out.println("course 개수 = " + repository.count());
 		};
 	}
 }
