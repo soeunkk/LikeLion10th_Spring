@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import com.sparta.week02.domain.Course;
 import com.sparta.week02.domain.CourseRepository;
+import com.sparta.week02.models.CourseRequestDto;
 import com.sparta.week02.service.CourseService;
 
 @EnableJpaAuditing
@@ -41,8 +42,8 @@ public class Week02Application {
 			);
 
 			// 데이터 갱신하기
-			Course new_course = new Course("프론트엔드의 꽃, 리액트", "임민영");
-			service.update(1L, new_course);
+			CourseRequestDto requestDto = new CourseRequestDto("프론트엔드의 꽃, 리액트", "임민영");
+			service.update(1L, requestDto);
 			courseList = repository.findAll();
 			for (int i=0; i<courseList.size(); i++) {
 				Course courseItem = courseList.get(i);

@@ -6,8 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.sparta.week02.models.CourseRequestDto;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @Entity
 public class Course extends Timestamped {
@@ -27,20 +31,8 @@ public class Course extends Timestamped {
 		this.tutor = tutor;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getTutor() {
-		return tutor;
-	}
-
-	public void update(Course course) {
-		this.title = course.title;
-		this.tutor = course.tutor;
+	public void update(CourseRequestDto requestDto) {
+		this.title = requestDto.getTitle();
+		this.tutor = requestDto.getTutor();
 	}
 }
