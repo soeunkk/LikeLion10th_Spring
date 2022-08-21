@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class PersonController {
 
 	private final PersonRepository personRepository;
-
 	private final PersonService personService;
 
 	// 친구 목록 조회
@@ -35,8 +34,7 @@ public class PersonController {
 	@PostMapping("/api/persons")
 	public Person savePerson(@RequestBody PersonRequestDto requestDto) {
 		Person person = new Person(requestDto);
-		personRepository.save(person);
-		return person;
+		return personRepository.save(person);
 	}
 
 	// 친구 정보 변경
@@ -51,5 +49,4 @@ public class PersonController {
 		personRepository.deleteById(id);
 		return id;
 	}
-
 }
