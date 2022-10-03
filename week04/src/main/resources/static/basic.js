@@ -112,7 +112,7 @@ function addProduct(itemDto) {
        success: function (response) {
            // 2. 응답 함수에서 modal을 뜨게 하고, targetId 를 reponse.id 로 설정 (숙제로 myprice 설정하기 위함)
            $('#container').addClass('active')
-           targetIdx = response.id;
+           targetId = response.id;
        }
    })
 }
@@ -177,4 +177,24 @@ function setMyprice() {
      * 5, 성공적으로 등록되었음을 알리는 alert를 띄운다.
      * 6. 창을 새로고침한다. window.location.reload();
      */
+
+    let myprice = $('#myprice').val();
+
+    if (myprice === '') {
+        alert('최저가를 입력해주세요.');
+        $('#myprice').focus();
+        return;
+    }
+
+    $.ajax({
+        type: "PUT",
+        url: `/api/products/${targetId}`,
+        contentType: "application/json",
+        data: JSON.stringify({myprice: myprice}),
+        success: function (response) {
+            $('#container').removeClass('active');
+            alert('성공적으로 등록되었습니다.');
+            window.location.reload();
+        }
+    })
 }
