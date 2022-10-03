@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.sparta.week04.dto.ItemDto;
 import com.sparta.week04.dto.ProductMypriceRequestDto;
 import com.sparta.week04.dto.ProductRequestDto;
 
@@ -50,5 +51,13 @@ public class Product extends Timestamped {
 	// 관심 가격 변경
 	public void updateMyprice(ProductMypriceRequestDto requestDto) {
 		this.myprice = requestDto.getMyprice();
+	}
+
+	// 최저가 정보 변경
+	public void updateByItemDto(ItemDto itemDto) {
+		this.title = itemDto.getTitle();
+		this.image = itemDto.getImage();
+		this.link = itemDto.getLink();
+		this.lprice = itemDto.getLprice();
 	}
 }
