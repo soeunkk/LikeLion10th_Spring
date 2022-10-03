@@ -26,11 +26,17 @@ public class ProductService {
 	}
 
 	@Transactional
-	public Long updateByService(Long id, ItemDto itemDto) {
+	public Long updateByService(long id, ItemDto itemDto) {
 		Product product = productRepository.findById(id).orElseThrow(
 				() -> new NullPointerException("해당 아이디가 존재하지 않습니다.")
 		);
 		product.updateByItemDto(itemDto);
+		return id;
+	}
+
+	@Transactional
+	public Long deleteById(long id) {
+		productRepository.deleteById(id);
 		return id;
 	}
 }

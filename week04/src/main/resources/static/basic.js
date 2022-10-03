@@ -9,6 +9,7 @@ $(document).ready(function () {
     });
     $('#close').on('click', function () {
         $('#container').removeClass('active');
+        alert('관심 상품으로 등록되었습니다.');
     })
 
     $('.nav div.nav-see').on('click', function () {
@@ -145,22 +146,26 @@ function showProduct() {
 
 function addProductItem(product) {
     // link, image, title, lprice, myprice 변수 활용하기
-    return `<div class="product-card" onclick="window.location.href='${product.link}'">
-                <div class="card-header">
+    return `<div class="product-card">
+                <div class="card-header" onclick="window.location.href='${product.link}'">
                     <img src="${product.image}"
                          alt="">
                 </div>
                 <div class="card-body">
-                    <div class="title">
+                    <div class="title" onclick="window.location.href='${product.link}'">
                         ${product.title}
                     </div>
-                    <div class="lprice">
-                        <span>${numberWithCommas(product.lprice)}</span>원
+                    <div>
+                        <div class="lprice">
+                            <span>${numberWithCommas(product.lprice)}</span>원
+                        </div>
+                        <img class="delete" src="images/icon-delete.png" alt="" onclick='deleteProduct(${product.id})'>
                     </div>
-                    <div class="isgood ${product.lprice > product.myprice ? 'none' : ''}">
+                    <div class="isgood ${product.lprice > product.myprice ? 'none' : ''}" onclick="window.location.href='${product.link}'">
                         최저가
                     </div>
                 </div>
+                <br>
             </div>`;
 }
 
@@ -193,7 +198,18 @@ function setMyprice() {
         data: JSON.stringify({myprice: myprice}),
         success: function (response) {
             $('#container').removeClass('active');
-            alert('성공적으로 등록되었습니다.');
+            alert('최저가 설정과 함께 관심 상품으로 등록되었습니다.');
+            window.location.reload();
+        }
+    })
+}
+
+function deleteProduct(productId) {
+    $.ajax({
+        type: "DELETE",
+        url: `/api/products/${productId}`,
+        success: function (response) {
+            alert('성공적으로 삭제되었습니다.');
             window.location.reload();
         }
     })

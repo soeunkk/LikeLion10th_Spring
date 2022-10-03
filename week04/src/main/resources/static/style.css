@@ -237,6 +237,7 @@ button {
 }
 
 .product-card .card-body .lprice {
+    display: inline;
     font-size: 15.8px;
     font-weight: normal;
     font-stretch: normal;
@@ -256,6 +257,12 @@ button {
     letter-spacing: -0.43px;
     text-align: left;
     color: #E8344E;
+}
+
+.product-card .card-body .delete {
+    display: inline;
+    width: 20px;
+    height: 20px;
 }
 
 .product-card .card-body .isgood {
