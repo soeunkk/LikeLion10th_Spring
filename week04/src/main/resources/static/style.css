@@ -70,7 +70,7 @@ body {
 .search-itemDto-right {
     display: inline-block;
     height: 100%;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .search-itemDto-right img {
@@ -266,15 +266,16 @@ button {
 }
 
 .product-card .card-body .isgood {
+    display: inline;
     margin-top: 10px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     color: white;
     border-radius: 2.6px;
     background-color: #ff8787;
     text-align: center;
-    width: 60px;
+    width: 50px;
 }
 
 .none {
-    display: none;
+    display: none !important;
 }

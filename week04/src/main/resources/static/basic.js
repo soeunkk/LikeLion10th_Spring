@@ -159,10 +159,12 @@ function addProductItem(product) {
                         <div class="lprice">
                             <span>${numberWithCommas(product.lprice)}</span>원
                         </div>
+                        
                         <img class="delete" src="images/icon-delete.png" alt="" onclick='deleteProduct(${product.id})'>
-                    </div>
-                    <div class="isgood ${product.lprice > product.myprice ? 'none' : ''}" onclick="window.location.href='${product.link}'">
-                        최저가
+                        
+                        <div class="isgood ${product.lprice > product.myprice ? 'none' : ''}">
+                            최저가
+                        </div>
                     </div>
                 </div>
                 <br>
