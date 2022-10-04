@@ -98,6 +98,11 @@ input#query::placeholder {
     padding: 15px;
 }
 
+#selectBox {
+    margin-left: 440px;
+    width: 115px;
+}
+
 button {
     color: white;
     border-radius: 4px;

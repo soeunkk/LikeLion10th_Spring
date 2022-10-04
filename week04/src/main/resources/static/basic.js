@@ -30,6 +30,10 @@ $(document).ready(function () {
     $('#see-area').show();
     $('#search-area').hide();
 
+    $('#selectBox').change(function() {
+        execSearch();
+    })
+
     showProduct();
 })
 
@@ -55,14 +59,17 @@ function execSearch() {
         return;
     }
 
-    // 3. GET /api/search?query=${query} 요청
+    // 3. 정렬 기준을 select 에서 받아온다.
+    let sort = $("#selectBox").val();
+
+    // 4. GET /api/search?query=${query} 요청
     $.ajax({
         type: 'GET',
-        url: `/api/search?query=${query}`,
+        url: `/api/search?query=${query}&sort=${sort}`,
         success: function (response) {
             $('#search-result-box').empty();
 
-            // 4. for 문마다 itemDto를 꺼내서 HTML 만들고 검색결과 목록에 붙이기!
+            // 5. for 문마다 itemDto를 꺼내서 HTML 만들고 검색결과 목록에 붙이기!
             for (let i = 0; i < response.length; i++) {
                 let itemDto = response[i];
                 let tempHtml = addHTML(itemDto);
