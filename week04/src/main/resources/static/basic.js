@@ -7,9 +7,9 @@ $(document).ready(function () {
             execSearch();
         }
     });
+
     $('#close').on('click', function () {
         $('#container').removeClass('active');
-        alert('관심 상품으로 등록되었습니다.');
     })
 
     $('.nav div.nav-see').on('click', function () {
@@ -123,6 +123,8 @@ function addProduct(itemDto) {
        contentType: "application/json",
        data: JSON.stringify(itemDto),
        success: function (response) {
+           alert('관심 상품으로 등록되었습니다.');
+
            // 2. 응답 함수에서 modal을 뜨게 하고, targetId 를 reponse.id 로 설정 (숙제로 myprice 설정하기 위함)
            $('#container').addClass('active')
            targetId = response.id;
@@ -174,7 +176,7 @@ function addProductItem(product) {
                         
                         <img class="delete" src="images/icon-delete.png" alt="" onclick='deleteProduct(${product.id})'>
                         
-                        <div class="isgood ${product.lprice > product.myprice ? 'none' : ''}">
+                        <div class="isgood ${product.lprice > product.myprice ? 'none' : ''}" onclick='showMyPricePopup(${product.id}, ${product.myprice})'>
                             최저가
                         </div>
                     </div>
@@ -212,7 +214,7 @@ function setMyprice() {
         data: JSON.stringify({myprice: myprice}),
         success: function (response) {
             $('#container').removeClass('active');
-            alert('최저가 설정과 함께 관심 상품으로 등록되었습니다.');
+            alert('최저가 설정이 완료되었습니다.');
             window.location.reload();
         }
     })
@@ -227,4 +229,10 @@ function deleteProduct(productId) {
             window.location.reload();
         }
     })
+}
+
+function showMyPricePopup(productId, myprice) {
+    $('#container').addClass('active');
+    $('#myprice').val(myprice);
+    targetId = productId;
 }
